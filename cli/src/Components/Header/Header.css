@@ -1,0 +1,42 @@
+.searchBlock {
+    display: flex;
+    height: 45px;
+    padding-left: 150px;
+}
+
+.header {
+    position: relative;
+    display: flex;
+    top: 20px;
+}
+
+.toggleGroup {
+    position: sticky;
+}
+.toggleBut {
+    align-items: center;
+}
+
+.custom_navbar {
+    color: #f0f1ff;
+}
+
+.searchBy {
+    padding-top: 10px;
+    padding-right: 5px;
+    color: #323333;
+    font-size: 14px;
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+
+.nav_user_components {
+    position: absolute;
+    right: 5px;
+}
+.btn-group-toggle > .btn, .btn-group-toggle > .btn-group > .btn {
+    margin-bottom: 0px;
+
+}
+
+
+
