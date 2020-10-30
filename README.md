@@ -1,4 +1,4 @@
-# Movies app (picture palace)
+# Movies App 
 
 Application built with React/Redux/Node JS/Mongo DB. This application is a mini-storage for movies information. App consists of two parts: client and server(api). There is the React/Redux on the client, Node JS, Mongo DB on the server.
 
