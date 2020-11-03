@@ -5,7 +5,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const errorHandler = require('moviesApp/api/_middleware/error-handler');
+const errorHandler = require('../api/_middleware/error-handler');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -22,7 +22,7 @@ app.delete('/books/:id', books.deleteBook);
 app.post('/samplePush', books.addSampleBooks);
 
 // swagger docs route
-app.use('/api-docs', require('moviesApp/api/_helpers/swagger'));
+app.use('/api-docs', require('../api/_helpers/swagger'));
 
 // global error handler
 app.use(errorHandler);

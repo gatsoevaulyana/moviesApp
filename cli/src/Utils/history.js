@@ -1,3 +1,3 @@
-import { createBrowserHistory } from 'moviesApp/cli/src/Utils/history';
+import { createBrowserHistory } from 'history';
 
 export const history = createBrowserHistory();
