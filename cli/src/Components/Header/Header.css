@@ -1,7 +1,7 @@
 .searchBlock {
     display: flex;
     height: 45px;
-    padding-left: 150px;
+    padding-left: 120px;
 }
 
 .header {
@@ -23,7 +23,7 @@
 
 .searchBy {
     padding-top: 10px;
-    padding-right: 5px;
+    padding-right: 15px;
     color: #323333;
     font-size: 14px;
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
@@ -36,6 +36,9 @@
 .btn-group-toggle > .btn, .btn-group-toggle > .btn-group > .btn {
     margin-bottom: 0px;
 
+}
+.search_input {
+    padding-left: 5px;
 }
 
 

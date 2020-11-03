@@ -42,12 +42,13 @@ class ModalDesc extends Component {
                     <p>Format: {selectedMovie.format} </p>
                 </div>
 
-                <div className={'buttons'}>
-                    <button onClick={() => this.props.showModal(false)} className="btn btn-block btn-primary"
-                            data-dismiss="modal">Close
-                    </button>
+                <div className={'btns-modal'}>
+
                     <button onClick={this.onDelete} data-dismiss="modal"
-                            className="btn btn-block btn-default btn-danger">Delete movie from database
+                            className="btn-modal btn  btn-danger">Delete movie from database
+                    </button>
+                    <button onClick={() => this.props.showModal(false)} className="btn-modal btn btn-block btn-primary"
+                            data-dismiss="modal">Close
                     </button>
                 </div>
             </Modal>

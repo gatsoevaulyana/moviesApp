@@ -8,9 +8,9 @@ import AddBookModal from "../AddMovie/AddMovieModal";
 import Login from "../Login/Login";
 import Navbar from "./Navbar";
 import RegModal from "../RegModal/RegModal";
-import { logoutUser} from "../../Actions/AuthActions";
+import {logoutUser} from "../../Actions/AuthActions";
 import {connect} from "react-redux";
-import { Account } from '../../Account/Index';
+import {Account} from '../../Account/Index';
 
 class Header extends Component {
 
@@ -84,89 +84,97 @@ class Header extends Component {
         return (
             <div>
 
-            <div className={'header'}>
+                <div className={'header'}>
 
 
-                <button className={'btn btn-primary'} onClick={this.props.sortMovies}>
+                    <button className={'btn btn-primary'} onClick={this.props.sortMovies}>
 
-                    <i className="icon fa fa-sort" aria-hidden="true"></i>
-                    <span>Sort by name</span>
-                </button>
-                <p></p>
+                        <i className="icon fa fa-sort" aria-hidden="true"></i>
+                        <span>Sort by name</span>
+                    </button>
+                    <p></p>
 
-                <input  className={'btn btn-secondary'} type="file"
-                       accept=".txt"
-                       onChange={this.props.onFileInput}
-                />
+                    <input className={'btn btn-secondary'} type="file"
+                           accept=".txt"
+                           onChange={this.props.onFileInput}
+                    />
 
-                <p></p>
+                    <p></p>
 
-                <button className={'btn btn-primary'} onClick={() => this.handleShowAddModal(true)}> Add Book</button>
+                    <button className={'btn btn-primary'} onClick={() => this.handleShowAddModal(true)}> Add Movie
+                    </button>
 
 
-                <div className={'searchBlock'}>
+                    <div className={'searchBlock'}>
 
-                    <p className={'searchBy'}> Search by: </p>
+                        <p className={'searchBy'}> Search by: </p>
 
-                    <ToggleButtonGroup  className={'toggleGroup'} defaultValue={'bold'} name={'searchBy'} onChange={this.changeSearchBy} aria-label="text formatting">
-                        <ToggleButton className={'toggleBut'} value="bold" aria-label="bold">
-                            Title
-                        </ToggleButton>
-                        <ToggleButton className={'toggleBut'} value="italic" aria-label="italic">
-                            Actor
-                        </ToggleButton>
-                    </ToggleButtonGroup>
+                        <ToggleButtonGroup className={'toggleGroup'} defaultValue={'bold'} name={'searchBy'}
+                                           onChange={this.changeSearchBy} aria-label="text formatting">
+                            <ToggleButton className={'toggleBut'} value="bold" aria-label="bold">
+                                Title
+                            </ToggleButton>
+                            <ToggleButton className={'toggleBut'} value="italic" aria-label="italic">
+                                Actor
+                            </ToggleButton>
+                        </ToggleButtonGroup>
 
-                    {this.state.searchBy === 'title' ?
-                        <div>
-                            <form className="form-inline my-2 my-lg-0">
-                                <input onChange={this.props.searchByMovieName} onKeyDown={this.handleKeyDown} onSubmit={this.props.searchByMovieName} className="form-control mr-sm-2" type="text"
-                                       placeholder="Search"/>
 
-                            </form>
-                        </div> :
-                        <div>
-                            <form className="form-inline">
-                                <input onChange={this.props.searchByActorName} onKeyDown={this.handleKeyDown} onSubmit={this.props.searchByActorName}className="form-control mr-sm-2" type="text"
-                                       placeholder="Search"/>
+                        <div className={'search_input'}>
+                            {this.state.searchBy === 'title' ?
+                                <div>
+                                    <form className="form-inline my-2 my-lg-0">
+                                        <input onChange={this.props.searchByMovieName} onKeyDown={this.handleKeyDown}
+                                               onSubmit={this.props.searchByMovieName} className="form-control mr-sm-2"
+                                               type="text"
+                                               placeholder="Search"/>
 
-                            </form>
+                                    </form>
+                                </div> :
+                                <div>
+                                    <form className="form-inline">
+                                        <input onChange={this.props.searchByActorName} onKeyDown={this.handleKeyDown}
+                                               onSubmit={this.props.searchByActorName} className="form-control mr-sm-2"
+                                               type="text"
+                                               placeholder="Search"/>
+
+                                    </form>
+                                </div>
+                            }
                         </div>
-                    }
 
 
+                    </div>
+
+
+                    <div className={'addBlock'}>
+                        {this.state.showAddModal ?
+                            <AddBookModal showModal={this.handleShowAddModal}/> :
+                            null
+                        }
+                    </div>
+
+                    <div>
+                        {this.state.showLoginModal ?
+                            <Login showModal={this.handleShowLoginModal}/> :
+                            null
+                        }
+                    </div>
+
+                    <div className={'addBlock'}>
+                        {this.state.showRegModal ?
+                            <RegModal showModal={this.handleShowRegModal}/> :
+                            null
+                        }
+                    </div>
 
                 </div>
-
-
-
-                <div className={'addBlock'}>
-                {this.state.showAddModal ?
-                    <AddBookModal showModal={this.handleShowAddModal}/> :
-                    null
-                }
-                </div>
-
-                <div >
-                    {this.state.showLoginModal ?
-                        <Login showModal={this.handleShowLoginModal}/> :
-                        null
-                    }
-                </div>
-
-                <div className={'addBlock'}>
-                    {this.state.showRegModal ?
-                        <RegModal showModal={this.handleShowRegModal}/> :
-                        null
-                    }
-                </div>
-
-            </div>
             </div>
         )
     };
 }
-const mapDispatchToProps = { logoutUser };
+
+const mapDispatchToProps = {logoutUser};
 
 function mapStateToProps(state) {
     return {

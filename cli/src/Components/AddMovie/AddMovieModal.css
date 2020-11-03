@@ -1,6 +1,7 @@
-.btns-modal{
-    padding-left: 35px;
-    padding-top: 30px;
+.btn-modal{
+    display:inline;
+    float:left;
+    width: 300px;
 }
 .btn-modal{
     display:inline;

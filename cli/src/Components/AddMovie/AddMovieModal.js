@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from 'react-modal';
 import {addMovie} from "../../Actions/MoviesActions";
 import {connect} from "react-redux";
+import './AddMovieModal.css'
 
 class AddMovieModal extends Component {
 
@@ -46,7 +47,7 @@ class AddMovieModal extends Component {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        height: '400px'
+                        height: '420px'
                     }
                 }}>
 
@@ -88,10 +89,12 @@ class AddMovieModal extends Component {
                                        id="example-text-input"/>
                             </div>
                         </div>
-                        <button className="btn btn-block btn-primary" data-dismiss="modal"
+                        <div className={'btns-modal'}>
+                        <button type='submit' className="btn btn-modal btn-block btn-default btn-success">Add Movie</button>
+                        <button className="btn btn-modal btn-primary" data-dismiss="modal"
                                 onClick={() => this.props.showModal(false)}>Close
                         </button>
-                        <button type='submit' className="btn btn-block btn-default btn-success">Add Movie</button>
+                        </div>
                     </form>
                 </Modal>
             </div>
