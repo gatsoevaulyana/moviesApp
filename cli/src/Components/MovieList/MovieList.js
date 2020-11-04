@@ -173,48 +173,53 @@ class MovieList extends Component {
                             {spinner}
                             {error}
 
-                            <div className='row'>
-                                {
+                            {this.movies.length===0 ? <p className={'notFound'}> Movies not found </p> :
 
-                                    this.movies.map
-                                    ((movie, index) => {
-                                        return (
-                                            <div className='col-sm-4' key={index}>
-                                                <div className='hovereffect'>
+                                <div className='row'>
+                                    {
+                                        this.movies.map
+                                        ((movie, index) => {
+                                            return (
+                                                <div className='col-sm-4' key={index}>
+                                                    <div className='hovereffect'>
 
-                                                    <h2>{movie['title']}</h2>
-                                                    <h5>{movie['year']}</h5>
-                                                    <img src={`${movie.picture}`}/>
-                                                    <p></p>
-                                                    <button className={'btn btn-primary'}
-                                                            onClick={() => this.handleShowModalDesc(movie, true)}> Show
-                                                        more
-                                                    </button>
-                                                    <p></p>
-                                                    {!this.state.user ?
-                                                        null
-                                                        :
-                                                        <React.Fragment>
-                                                            <div className={'wishlist-icon'}>
-                                                                <a  className={'btn heart'} onClick={() => accountService.addMovieToWishlist(movie)}>
-                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16"
-                                                                         className="bi bi-suit-heart-fill" fill="currentColor"
-                                                                         xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </React.Fragment>}
+                                                        <h2>{movie['title']}</h2>
+                                                        <h5>{movie['year']}</h5>
+                                                        <img src={`${movie.picture}`}/>
+                                                        <p></p>
+                                                        <button className={'btn btn-primary'}
+                                                                onClick={() => this.handleShowModalDesc(movie, true)}> Show
+                                                            more
+                                                        </button>
+                                                        <p></p>
+                                                        {!this.state.user ?
+                                                            null
+                                                            :
+                                                            <React.Fragment>
+                                                                <div className={'wishlist-icon'}>
+                                                                    <a className={'btn heart'}
+                                                                       onClick={() => accountService.addMovieToWishlist(movie)}>
+                                                                        <svg width="1em" height="1em"
+                                                                             viewBox="0 0 16 16"
+                                                                             className="bi bi-suit-heart-fill"
+                                                                             fill="currentColor"
+                                                                             xmlns="http://www.w3.org/2000/svg">
+                                                                            <path
+                                                                                d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+                                                                        </svg>
+                                                                    </a>
+                                                                </div>
+                                                            </React.Fragment>}
 
 
-
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )
-                                    })}
+                                            )
+                                        })}
 
-                            </div>
+                                </div>
+
+                            }
 
                             {this.state.showModalDesc ?
                                 <ModalDesc
@@ -222,6 +227,7 @@ class MovieList extends Component {
                                     selectedMovie={this.state.selectedMovie}
                                 /> :
                                 null
+
                             }
 
 

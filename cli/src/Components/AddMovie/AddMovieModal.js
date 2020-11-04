@@ -4,6 +4,8 @@ import Modal from 'react-modal';
 import {addMovie} from "../../Actions/MoviesActions";
 import {connect} from "react-redux";
 import './AddMovieModal.css'
+import {accountService} from "../../Services/account.service";
+import {alertService} from "../../Services/alert.service";
 
 class AddMovieModal extends Component {
 
@@ -14,7 +16,7 @@ class AddMovieModal extends Component {
             year: '',
             format: '',
             stars: '',
-            image: ''
+            picture: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -26,12 +28,19 @@ class AddMovieModal extends Component {
         this.setState(
             {[e.target.name]: e.target.value}
         );
-        console.log(this.state);
+
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.addMovie(this.state);
+
+        try {
+            this.props.addMovie(this.state);
+        } catch (err) {
+           alert(err);
+        }
+
+
         this.props.showModal(false)
     }
 
@@ -59,7 +68,8 @@ class AddMovieModal extends Component {
                         <div className="form-group row">
                             <label htmlFor="example-text-input" className="col-2 col-form-label">Title</label>
                             <div className="col-10">
-                                <input onChange={this.handleChange} title={'Некорректное название'} required pattern={"[A-Za-z ,:]+"}
+                                <input onChange={this.handleChange} title={'Некорректное название'} required
+                                       pattern={"[A-Za-z ,:]+"}
                                        className="form-control" name='title'
                                        placeholder='Movie title' type="text" id="example-text-input"/>
                             </div>
@@ -67,7 +77,9 @@ class AddMovieModal extends Component {
                         <div className="form-group row">
                             <label htmlFor="example-text-input" className="col-2 col-form-label">Year</label>
                             <div className="col-10">
-                                <input onChange={this.handleChange} title = {'Допустимы только цифры в четырезначном виде (например 2020)'} required pattern={"[0-9]{4}"}
+                                <input onChange={this.handleChange}
+                                       title={'Допустимы только цифры в четырезначном виде (например 2020)'} required
+                                       pattern={"[0-9]{4}"}
                                        className="form-control" name='year'
                                        placeholder='Release year' type="text" id="example-text-input"/>
                             </div>
@@ -75,9 +87,10 @@ class AddMovieModal extends Component {
                         <div className="form-group row">
                             <label htmlFor="example-text-input" className="col-2 col-form-label">Format</label>
                             <div className="col-10">
-                                <select onChange={this.handleChange} name='format' required className="form-control"
+                                <select onChange={this.handleChange} on name='format' required className="form-control"
                                         placeholder='Format' id="example-text-input">
-                                    <option value={'VSH'}>VHS</option>
+                                    <option > </option>
+                                    <option  value={'VSH'}>VHS</option>
                                     <option value={'DVD'}>DVD</option>
                                     <option value={'Blu-Ray'}>Blu-Ray</option>
                                 </select>
@@ -93,15 +106,16 @@ class AddMovieModal extends Component {
                             </div>
                         </div>
                         <div className="form-group row">
-                            <label htmlFor="example-text-input" className="col-2 col-form-label">Image</label>
+                            <label htmlFor="example-text-input" className="col-2 col-form-label">Picture</label>
                             <div className="col-10">
-                                <input onChange={this.handleChange} title={'Допустим только формат ссылки на изображение'} name='image' defaultValue={'Default poster image'}
+                                <input onChange={this.handleChange}
+                                       title={'Допустим только формат ссылки на изображение'} name='picture'
                                        className="form-control" placeholder='Poster image url' type="text"
                                        id="example-text-input"/>
                             </div>
                         </div>
                         <div className={'upload-file common-row '}>
-                            <p>  <br/>Or you can upload file with movies  <br/></p>
+                            <p><br/>Or you can upload file with movies <br/></p>
 
                             <input className={'btn btn-secondary '} type="file" name={" "}
                                    accept=".txt"
@@ -124,27 +138,27 @@ class AddMovieModal extends Component {
 
                 </Modal>
             </div>
-    );
+        );
     }
-    }
+}
 
-    const mapDispatchToProps = (dispatch) => {
-        return {
+const mapDispatchToProps = (dispatch) => {
+    return {
 
         addMovie: (newMovie) => {
-        dispatch(addMovie(newMovie));
-    }
+            dispatch(addMovie(newMovie));
+        }
 
 
     }
-    };
+};
 
-    function mapStateToProps(state) {
-        return {
+function mapStateToProps(state) {
+    return {
         movies: state.movies,
     };
-    }
+}
 
-    export default connect(
+export default connect(
     mapStateToProps, mapDispatchToProps
-    )(AddMovieModal);
+)(AddMovieModal);

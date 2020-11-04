@@ -4,7 +4,7 @@
 .hovereffect img {
     position: relative;
     max-width: none;
-    width: 255px;
+    width: 200px;
     height: 200px;
     -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
     transition: opacity 0.35s, transform 0.35s;
@@ -108,4 +108,9 @@ a:hover {
     position: absolute;
     right: 0px;
     top: 0px;
+}
+
+.notFound {
+    text-align: center;
+    padding-top: 30px;
 }

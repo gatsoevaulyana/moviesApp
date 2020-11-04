@@ -110,12 +110,7 @@ function Update({ history }) {
                             {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
                             Update
                         </button>
-                        <button type="button" onClick={() => onDelete()} className="btn btn-danger" style={{ width: '75px' }} disabled={isDeleting}>
-                            {isDeleting
-                                ? <span className="spinner-border spinner-border-sm"></span>
-                                : <span>Delete</span>
-                            }
-                        </button>
+
                         <Link to="." className="btn btn-link">Cancel</Link>
                     </div>
                 </Form>

@@ -1,12 +1,13 @@
 import axios from 'axios';
 import {parseFile} from "../parseSampleMovies";
 import { MOVIES_ERROR, MOVIES_LOADED, MOVIES_REQUESTED, FAV_MOVIES_ERROR, FAV_MOVIES_LOADED, FAV_MOVIES_REQUESTED , DELETE_MOVIE, SET_SEARCH_BY_ACTOR, SET_SEARCH_BY_TITLE, CLEAR_SEARCH_BY_ACTOR, SORT_MOVIES } from './types';
+import {alertService} from "../Services/alert.service";
 
 export const getMovies = () => dispatch => {
     dispatch({
         type: MOVIES_REQUESTED
     });
-    axios.get('http://localhost:4000/books').then(res => {
+    axios.get('http://localhost:4000/movies').then(res => {
         dispatch({
             type: MOVIES_LOADED,
             payload: res.data,
@@ -23,12 +24,12 @@ export const getMovies = () => dispatch => {
 
 export const addMovie = (newMovie) => dispatch => {
     axios
-        .post('http://localhost:4000/books', newMovie)
+        .post('http://localhost:4000/movies', newMovie)
         .then(() => {
             dispatch(getMovies())
         })
         .catch(function (error) {
-            console.log(error.response);
+            alertService.error(error.response.data.msg);
         });
 
 };
@@ -36,7 +37,7 @@ export const addMovie = (newMovie) => dispatch => {
 
 export const deleteMovie = (id) => dispatch => {
     axios
-        .delete(`http://localhost:4000/books/${id}`)
+        .delete(`http://localhost:4000/movies/${id}`)
         .then(() => {
                 dispatch({
                     type: DELETE_MOVIE,

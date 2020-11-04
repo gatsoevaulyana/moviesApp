@@ -189,12 +189,14 @@ async function create(params) {
 async function addMovieToWishlist(id, movie) {
     // const account = await db.Account.findOne({ id: id });
     const account = await getAccount(id);
-
+if(!account.listFavMovies.find(m => m._id===movie._id)) {
     account.listFavMovies.push(movie);
+}
     account.save();
     return {
         ...basicDetails(account)
     }
+
 };
 
 async function removeMovie(id, movie) {

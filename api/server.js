@@ -1,5 +1,5 @@
 ﻿require('rootpath')();
-const books = require('./Rootes/Api/Book');
+const movies = require('./Rootes/Api/Movie');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -16,10 +16,10 @@ app.use(cors({ origin: (origin, callback) => callback(null, true), credentials: 
 
 // api routes
 app.use('/accounts', require('./accounts/accounts.controller'));
-app.get('/books', books.listBooks);
-app.post('/books', books.addBook);
-app.delete('/books/:id', books.deleteBook);
-app.post('/samplePush', books.addSampleBooks);
+app.get('/movies', movies.listBooks);
+app.post('/movies', movies.addBook);
+app.delete('/movies/:id', movies.deleteBook);
+app.post('/samplePush', movies.addSampleBooks);
 
 // swagger docs route
 app.use('/api-docs', require('../api/_helpers/swagger'));
