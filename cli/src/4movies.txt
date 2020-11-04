@@ -2,18 +2,22 @@ Title: Blazing Saddles
 Year: 1974
 Format: VHS
 Stars: Mel Brooks, Clevon Little, Harvey Korman, Gene Wilder, Slim Pickens, Madeline Kahn
+Picture: https://images-na.ssl-images-amazon.com/images/I/81fC6M1HfLL._RI_.jpg
 
 Title: Casablanca
 Year: 1942
 Format: DVD
 Stars: Humphrey Bogart, Ingrid Bergman, Claude Rains, Peter Lorre
+Picture: https://upload.wikimedia.org/wikipedia/ru/9/94/Casablanca_%28poster%29.jpg
 
 Title: Charade
 Year: 1953
 Format: DVD
 Stars: Audrey Hepburn, Cary Grant, Walter Matthau, James Coburn, George Kennedy
+Picture: https://images-na.ssl-images-amazon.com/images/I/71RmYoOIQEL._SL1200_.jpg
 
 Title: Cool Hand Luke
 Year: 1967
 Format: VHS
 Stars: Paul Newman, George Kennedy, Strother Martin
+Picture: https://lh3.googleusercontent.com/proxy/ETR97dOp9CjHhQRZv_kVpeZ34c_Iy-AWbtjtEveuUo0Z9Kjg2BpMsirJTgV2OSKmTSZSenou0NkZGeAxa3SsIaE3NZ6ooc1G73Q9kDSg-NvhEmownDMPUamJplJjZrG71ejiDXAyliwo07yIaIK5U6fasjgjLRbj802iD1HfJAB1KKEtOic9apuVn0fp5IaL7Wx3
