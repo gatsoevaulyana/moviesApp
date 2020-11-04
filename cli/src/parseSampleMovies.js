@@ -73,7 +73,7 @@ const parseMovie = (block) => {
         }
     };
 
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 5; i++) {
         let value = getValue(block[i]) || '';
         let key = getKey(block[i]) || '';
         if (keyHash[key.toLowerCase()]) {
