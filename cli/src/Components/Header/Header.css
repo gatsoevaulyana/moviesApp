@@ -1,7 +1,7 @@
 .searchBlock {
     display: flex;
     height: 45px;
-    padding-left: 120px;
+    padding-left: 450px;
 }
 
 .header {
@@ -22,7 +22,7 @@
 }
 
 .searchBy {
-    padding-top: 10px;
+
     padding-right: 15px;
     color: #323333;
     font-size: 14px;

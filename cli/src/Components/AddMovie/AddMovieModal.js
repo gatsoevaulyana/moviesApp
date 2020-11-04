@@ -22,7 +22,6 @@ class AddMovieModal extends Component {
     }
 
 
-
     handleChange(e) {
         this.setState(
             {[e.target.name]: e.target.value}
@@ -36,6 +35,11 @@ class AddMovieModal extends Component {
         this.props.showModal(false)
     }
 
+    onFileInput(e) {
+        this.props.onFileInput(e);
+        this.props.showModal(false);
+    }
+
 
     render() {
 
@@ -47,7 +51,7 @@ class AddMovieModal extends Component {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        height: '420px'
+                        height: '550px'
                     }
                 }}>
 
@@ -55,28 +59,35 @@ class AddMovieModal extends Component {
                         <div className="form-group row">
                             <label htmlFor="example-text-input" className="col-2 col-form-label">Title</label>
                             <div className="col-10">
-                                <input onChange={this.handleChange} required  pattern={"[A-Za-z ]+"} className="form-control" name='title'
+                                <input onChange={this.handleChange} title={'Некорректное название'} required pattern={"[A-Za-z ,:]+"}
+                                       className="form-control" name='title'
                                        placeholder='Movie title' type="text" id="example-text-input"/>
                             </div>
                         </div>
                         <div className="form-group row">
                             <label htmlFor="example-text-input" className="col-2 col-form-label">Year</label>
                             <div className="col-10">
-                                <input onChange={this.handleChange} required pattern={"[0-9]{4}"} className="form-control" name='year'
+                                <input onChange={this.handleChange} title = {'Допустимы только цифры в четырезначном виде (например 2020)'} required pattern={"[0-9]{4}"}
+                                       className="form-control" name='year'
                                        placeholder='Release year' type="text" id="example-text-input"/>
                             </div>
                         </div>
                         <div className="form-group row">
                             <label htmlFor="example-text-input" className="col-2 col-form-label">Format</label>
                             <div className="col-10">
-                                <input onChange={this.handleChange} name='format' required className="form-control"
-                                       placeholder='Format' type="text" id="example-text-input"/>
+                                <select onChange={this.handleChange} name='format' required className="form-control"
+                                        placeholder='Format' id="example-text-input">
+                                    <option value={'VSH'}>VHS</option>
+                                    <option value={'DVD'}>DVD</option>
+                                    <option value={'Blu-Ray'}>Blu-Ray</option>
+                                </select>
                             </div>
                         </div>
                         <div className="form-group row">
                             <label htmlFor="example-text-input" className="col-2 col-form-label">Actors</label>
                             <div className="col-10">
-                                <input onChange={this.handleChange} required pattern={"[A-Za-z ,]+"} name='stars' className="form-control"
+                                <input onChange={this.handleChange} required pattern={"[A-Za-z ,]+"} name='stars'
+                                       className="form-control"
                                        placeholder='Actors, with comma(e.g. Adam Smith, Bob Marley)' type="text"
                                        id="example-text-input"/>
                             </div>
@@ -84,41 +95,56 @@ class AddMovieModal extends Component {
                         <div className="form-group row">
                             <label htmlFor="example-text-input" className="col-2 col-form-label">Image</label>
                             <div className="col-10">
-                                <input onChange={this.handleChange} name='image' defaultValue={'Default poster image'}
+                                <input onChange={this.handleChange} title={'Допустим только формат ссылки на изображение'} name='image' defaultValue={'Default poster image'}
                                        className="form-control" placeholder='Poster image url' type="text"
                                        id="example-text-input"/>
                             </div>
                         </div>
+                        <div className={'upload-file common-row '}>
+                            <p>  <br/>Or you can upload file with movies  <br/></p>
+
+                            <input className={'btn btn-secondary '} type="file" name={" "}
+                                   accept=".txt"
+                                   onChange={(e) => this.onFileInput(e)}
+                            />
+
+                        </div>
                         <div className={'btns-modal'}>
-                        <button type='submit' className="btn btn-modal btn-block btn-default btn-success">Add Movie</button>
-                        <button className="btn btn-modal btn-primary" data-dismiss="modal"
-                                onClick={() => this.props.showModal(false)}>Close
-                        </button>
+                            <button type='submit' className="btn btn-modal btn-block btn-default btn-success">Add
+                                Movie
+                            </button>
+                            <button className="btn btn-modal btn-primary" data-dismiss="modal"
+                                    onClick={() => this.props.showModal(false)}>Close
+                            </button>
                         </div>
                     </form>
+                    <br/>
+                    <br/>
+                    <br/>
+
                 </Modal>
             </div>
-        );
+    );
     }
-}
+    }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
+    const mapDispatchToProps = (dispatch) => {
+        return {
 
         addMovie: (newMovie) => {
-            dispatch(addMovie(newMovie));
-        }
+        dispatch(addMovie(newMovie));
+    }
 
 
     }
-};
+    };
 
-function mapStateToProps(state) {
-    return {
+    function mapStateToProps(state) {
+        return {
         movies: state.movies,
     };
-}
+    }
 
-export default connect(
+    export default connect(
     mapStateToProps, mapDispatchToProps
-)(AddMovieModal);
+    )(AddMovieModal);

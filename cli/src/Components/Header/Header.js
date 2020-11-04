@@ -4,6 +4,9 @@ import parseSampleBooks from "../../parseSampleMovies";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import './Header.css';
+import {
+    loadSampleMovie
+} from '../../Actions/MoviesActions';
 import AddBookModal from "../AddMovie/AddMovieModal";
 import Login from "../Login/Login";
 import Navbar from "./Navbar";
@@ -11,6 +14,7 @@ import RegModal from "../RegModal/RegModal";
 import {logoutUser} from "../../Actions/AuthActions";
 import {connect} from "react-redux";
 import {Account} from '../../Account/Index';
+import Modal from "react-modal";
 
 class Header extends Component {
 
@@ -27,6 +31,7 @@ class Header extends Component {
         };
 
         this.handleShowAddModal = this.handleShowAddModal.bind(this);
+        this.loadSampleMovie = this.loadSampleMovie.bind(this);
         this.handleShowLoginModal = this.handleShowLoginModal.bind(this);
         this.handleShowRegModal = this.handleShowRegModal.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
@@ -58,6 +63,15 @@ class Header extends Component {
             e.preventDefault()
         }
     }
+
+    loadSampleMovie() {
+        this.props.loadSampleMovie();
+    }
+
+    onFileInput = (e) => {
+        const file = e.target.files[0];
+        this.props.loadSampleMovie(file);
+    };
 
 
     handleLogout = e => {
@@ -94,15 +108,13 @@ class Header extends Component {
                     </button>
                     <p></p>
 
-                    <input className={'btn btn-secondary'} type="file"
-                           accept=".txt"
-                           onChange={this.props.onFileInput}
-                    />
 
                     <p></p>
 
                     <button className={'btn btn-primary'} onClick={() => this.handleShowAddModal(true)}> Add Movie
                     </button>
+
+
 
 
                     <div className={'searchBlock'}>
@@ -149,7 +161,9 @@ class Header extends Component {
 
                     <div className={'addBlock'}>
                         {this.state.showAddModal ?
-                            <AddBookModal showModal={this.handleShowAddModal}/> :
+                            <AddBookModal showModal={this.handleShowAddModal}
+                                          onFileInput={this.onFileInput}/> :
+
                             null
                         }
                     </div>
@@ -174,7 +188,17 @@ class Header extends Component {
     };
 }
 
-const mapDispatchToProps = {logoutUser};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logoutUser: () => {
+            dispatch(logoutUser());
+        },
+        loadSampleMovie:
+            (fileText) => {
+                dispatch(loadSampleMovie(fileText))
+            }
+    }
+}
 
 function mapStateToProps(state) {
     return {
