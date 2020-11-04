@@ -7,7 +7,6 @@ import {
     sortMovies,
     clearSearchByActor,
     setSearchByActor,
-    loadSampleMovie,
     setSearchByTitle,
 
 } from '../../Actions/MoviesActions';
@@ -25,6 +24,7 @@ import sortMoviesSelector from "../../Selectors/Movies";
 import Header from "../Header/Header";
 import Navbar from "../Header/Navbar";
 import {accountService} from "../../Services/account.service";
+import {NavLink} from "react-router-dom";
 
 class MovieList extends Component {
 
@@ -33,7 +33,8 @@ class MovieList extends Component {
         super();
         this.state = {
             showModalDesc: false,
-            selectedMovie: 0
+            selectedMovie: 0,
+            user: null
         };
 
         this.handleShowModalDesc = this.handleShowModalDesc.bind(this);
@@ -41,7 +42,7 @@ class MovieList extends Component {
         this.toggleModalDesc = this.toggleModalDesc.bind(this);
         this.setSelectedMovie = this.setSelectedMovie.bind(this);
         this.searchByActorName = this.searchByActorName.bind(this);
-        this.loadSampleMovie = this.loadSampleMovie.bind(this);
+
         this.searchByMovieName = this.searchByMovieName.bind(this);
         this.addMovieToWishlist = this.addMovieToWishlist.bind(this);
 
@@ -49,18 +50,26 @@ class MovieList extends Component {
     }
 
 
+
+    setUser(value) {
+        this.setState({
+            user: value
+        })
+    };
+
+
+
+
     addMovieToWishlist(movie) {
         this.props.addMovieToWishlist(movie);
     }
 
-    loadSampleMovie() {
-        this.props.loadSampleMovie();
-    }
-
 
     componentDidMount() {
+        const subscription = accountService.user.subscribe(x => this.setUser(x));
         this.props.getMovies();
         this.props.clearSearch();
+        return subscription.unsubscribe;
 
     }
 
@@ -177,19 +186,26 @@ class MovieList extends Component {
                                                     <h5>{movie['year']}</h5>
                                                     <img src={`${movie.picture}`}/>
                                                     <p></p>
-                                                    <button className={'btn btn-primary'} onClick={() => this.handleShowModalDesc(movie, true)}> Show more</button>
+                                                    <button className={'btn btn-primary'}
+                                                            onClick={() => this.handleShowModalDesc(movie, true)}> Show
+                                                        more
+                                                    </button>
                                                     <p></p>
-                                                    <div className={'wishlist-icon'}>
-                                                    <a onClick={() => accountService.addMovieToWishlist(movie)}>
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16"
-                                                             className="bi bi-suit-heart-fill" fill="currentColor"
-                                                             xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
-                                                        </svg>
-                                                    </a>
-                                                    </div>
-
+                                                    {!this.state.user ?
+                                                        null
+                                                        :
+                                                        <React.Fragment>
+                                                            <div className={'wishlist-icon'}>
+                                                                <a  className={'btn heart'} onClick={() => accountService.addMovieToWishlist(movie)}>
+                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16"
+                                                                         className="bi bi-suit-heart-fill" fill="currentColor"
+                                                                         xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
+                                                        </React.Fragment>}
 
 
 
@@ -237,9 +253,7 @@ const mapDispatchToProps = (dispatch) => {
         clearSearch: () => {
             dispatch(clearSearchByActor())
         },
-        loadSampleMovie: (fileText) => {
-            dispatch(loadSampleMovie(fileText))
-        },
+
         addMovieToWishlist: (movie) => {
             dispatch(addMovieToWishlist(movie))
         }

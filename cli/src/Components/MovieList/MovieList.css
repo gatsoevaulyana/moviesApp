@@ -84,6 +84,13 @@ a:hover {
     padding-left: 15px;
 }
 
+
+.btn:active {
+    color: #9555af;
+    border-color: currentColor;
+    background-color: white;
+}
+
 .page{
     text-align: center;
     display: block;
@@ -99,6 +106,6 @@ a:hover {
 .wishlist-icon {
     font-size: 25px;
     position: absolute;
-    right: 15px;
+    right: 0px;
     top: 0px;
 }
