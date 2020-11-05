@@ -69,7 +69,7 @@ class AddMovieModal extends Component {
                             <label htmlFor="example-text-input" className="col-2 col-form-label">Title</label>
                             <div className="col-10">
                                 <input onChange={this.handleChange} title={'Некорректное название'} required
-                                       pattern={"[A-Za-z ,:]+"}
+                                       pattern={"[A-Za-z А-Яа-я,:]+"}
                                        className="form-control" name='title'
                                        placeholder='Movie title' type="text" id="example-text-input"/>
                             </div>
