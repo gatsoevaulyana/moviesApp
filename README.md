@@ -66,3 +66,5 @@ or
 npm run test
 ```
 
+File-example for upload movies - 4movies.txt in cli => src folder
+
