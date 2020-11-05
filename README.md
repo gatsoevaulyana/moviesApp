@@ -33,23 +33,22 @@ yarn install or npm install
 3. Run Mongo DB, type in the terminal/command line:
 
 ```
-linux: mongod
-windows: mongod.exe
+windows: mongod.exe => mongo.exe
 ```
 
-4. Run server part of the application. In the app folder, run the command
+4. Run server part of the application. In the api folder, run the command
 
 ```
-cd api
+cd api =>
 yarn start
 or
 npm run start
 ```
 
-5. Run client side of the application. In the app folder, run the command
+5. Run client side of the application. In the cli folder, run the command
 
 ```
-cd cli
+cd cli =>
 yarn start
 or
 npm run start
@@ -58,4 +57,12 @@ npm run start
 
 Now you should have running app (client on the port:3000, server on the port:4000)
 
+6. Run tests of the application. In the api folder, run the command
+
+```
+cd api
+yarn test
+or
+npm run test
+```
 

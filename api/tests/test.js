@@ -11,31 +11,32 @@ chai.use(chaiHttp);
 
 describe('Tasks API', () => {
 
+    describe('GET all films', () => {
+        // Test [Get all movies]
+        describe('GET /movies', () => {
+            it('It has to return all movies', done => {
+                chai.request(app)
+                    .get('/movies')
+                    .end((error, response) => {
+                        response.should.have.status(200);
+                        response.body.should.be.a('array');
+                        done();
+                    });
+            });
 
-    // Test [Get all movies]
-    describe('GET /books', () => {
-        it('It has to return all movies', done => {
-            chai.request(app)
-                .get('/books')
-                .end((error, response) => {
-                    response.should.have.status(200);
-                    response.body.should.be.a('array');
-                    done();
-                });
-        });
-
-        it('It has NOT to return all movies (wrong uri)', done => {
-            chai.request(app)
-                .get('/book')
-                .end((error, response) => {
-                    response.should.have.status(404);
-                    done();
-                });
+            it('It has NOT to return all movies (wrong uri)', done => {
+                chai.request(app)
+                    .get('/movie')
+                    .end((error, response) => {
+                        response.should.have.status(404);
+                        done();
+                    });
+            });
         });
     });
 
-    describe('CREATE and a film', () => {
-        describe('POST /books', () => {
+    describe('CREATE a film', () => {
+        describe('POST /movies', () => {
             const newMovieSuccess = {
                 title: 'test',
                 releaseYear: 2000,
@@ -44,11 +45,11 @@ describe('Tasks API', () => {
                 picture: 'default.jpg'
             };
 
-            const newMovieFailure = 12121 ;
+            const newMovieFailure = 12121;
 
             it('It has to add one more movie', done => {
                 chai.request(app)
-                    .get('/books')
+                    .get('/movies')
                     .set('content-type', 'application/json')
                     .send(newMovieSuccess)
                     .end((error, response) => {
@@ -59,7 +60,7 @@ describe('Tasks API', () => {
 
             it('It NO has to add one more movie (invalid type of request body)', done => {
                 chai.request(app)
-                    .get('/books')
+                    .get('/movies')
                     .set('content-type', 'application/json')
                     .send(newMovieFailure)
                     .end((error, response) => {
@@ -67,23 +68,13 @@ describe('Tasks API', () => {
                         done();
                     });
             });
-
-            it('It NO has to get favourite movies', done => {
-                chai.request(app)
-                    .get('/accounts/myMovies')
-                    .set('content-type', 'application/json')
-                    .send()
-                    .end((error, response) => {
-                        response.should.have.status(500);
-                        done();
-                    });
-            });
-
-
-        });
-
+        })
     });
+
 });
+
+
+
 
 
 
