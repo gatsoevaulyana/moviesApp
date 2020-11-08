@@ -79,7 +79,9 @@ class AddMovieModal extends Component {
                             <div className="col-10">
                                 <input onChange={this.handleChange}
                                        title={'Допустимы только цифры в четырезначном виде (например 2020)'} required
-                                       pattern={"[0-9]{4}"}
+                                       pattern={"^(18[5-9][0-9]|19[0-9][0-9]|20[01][0-9]|2020)$"}
+                                       min={'1850'}
+                                       max={'2020'}
                                        className="form-control" name='year'
                                        placeholder='Release year' type="text" id="example-text-input"/>
                             </div>
@@ -99,7 +101,7 @@ class AddMovieModal extends Component {
                         <div className="form-group row">
                             <label htmlFor="example-text-input" className="col-2 col-form-label">Actors</label>
                             <div className="col-10">
-                                <input onChange={this.handleChange} required pattern={"[A-Za-z ,]+"} name='stars'
+                                <input onChange={this.handleChange} required pattern={"[A-Za-z А-Яа-я,]+"} name='stars'
                                        className="form-control"
                                        placeholder='Actors, with comma(e.g. Adam Smith, Bob Marley)' type="text"
                                        id="example-text-input"/>
