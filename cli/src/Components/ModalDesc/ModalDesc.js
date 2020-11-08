@@ -3,6 +3,7 @@ import {deleteMovie} from "../../Actions/MoviesActions";
 import {connect} from "react-redux";
 import Modal from "react-modal";
 import './ModalDesc.css';
+import DeleteModal from "../DeleteMovieModal/DeleteModal";
 
 
 class ModalDesc extends Component {
@@ -10,14 +11,24 @@ class ModalDesc extends Component {
 
     constructor(props) {
         super(props);
-        this.onDelete = this.onDelete.bind(this);
+        this.state = {
+            showModalDelete: false
+        };
+
+        this.toggleModalDelete = this.toggleModalDelete.bind(this);
+        this.toggleModalDesc = this.toggleModalDesc.bind(this);
+    }
+
+    toggleModalDelete(value) {
+        this.setState({
+            showModalDelete: value
+        });
 
     }
 
-    onDelete() {
-        this.props.deleteMovie(this.props.selectedMovie._id);
-        this.props.showModal(false);
-    }
+    toggleModalDesc = (value) => { this.props.showModal(value)
+
+    };
 
 
     render() {
@@ -25,6 +36,7 @@ class ModalDesc extends Component {
         const {selectedMovie} = this.props;
 
         return (
+            <div>
             <Modal isOpen={this.props.showModal} style={{
                 content: {
                     top: '50%',
@@ -44,35 +56,33 @@ class ModalDesc extends Component {
 
                 <div className={'btns-modal'}>
 
-                    <button onClick={this.onDelete} data-dismiss="modal"
+                    <button onClick={() => this.toggleModalDelete(true)} data-dismiss="modal"
                             className="btn-modal btn  btn-danger">Delete movie from database
                     </button>
                     <button onClick={() => this.props.showModal(false)} className="btn-modal btn btn-block btn-primary"
                             data-dismiss="modal">Close
                     </button>
                 </div>
+
+                {this.state.showModalDelete ?
+                    <DeleteModal
+                        showModal={this.toggleModalDelete}
+                        selectedMovie={this.props.selectedMovie}
+                        showModalDesc={this.toggleModalDesc}
+                    /> :
+                    null
+
+                }
             </Modal>
+
+            </div>
+
 
         );
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
 
-        deleteMovie: (id) => {
-            dispatch(deleteMovie(id))
-        }
-    }
-};
 
-function mapStateToProps(state) {
-    return {
-        movies: state.movies,
-    };
-}
-
-export default connect(
-    mapStateToProps, mapDispatchToProps
-)(ModalDesc);
+export default ModalDesc;
 

@@ -1,5 +1,3 @@
-
-
 const movieReducer = (state = {
     movies: [],
     loading: true,
@@ -7,8 +5,7 @@ const movieReducer = (state = {
     shouldBeSorted: false,
     searchValueByActorName: '',
     searchValueByMovieName: '',
-    isAuthenticated: true,
-    text: 'test1'
+    isAuthenticated: true
 
 }, action) => {
 
@@ -46,7 +43,6 @@ const movieReducer = (state = {
                     error: action.payload
                 }
             );
-
 
 
         case 'ADD_MOVIE':
@@ -113,7 +109,7 @@ const movieReducer = (state = {
                     text: action.value
                 }
             );
-            }
+        }
 
 
         case 'CLEAR_SEARCH_BY_ACTOR': {
@@ -125,7 +121,6 @@ const movieReducer = (state = {
                 }
             );
         }
-
 
 
     }

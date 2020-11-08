@@ -31,7 +31,7 @@ const addBook = async (req, res) => {
         if (err) {
             res.send(err);
         }
-        res.json({message: 'movie added'});
+        return res.status(200).json({msg: "Movie added successfully"});
     });
 
 

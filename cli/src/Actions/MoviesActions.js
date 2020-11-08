@@ -25,7 +25,8 @@ export const getMovies = () => dispatch => {
 export const addMovie = (newMovie) => dispatch => {
     axios
         .post('http://localhost:4000/movies', newMovie)
-        .then(() => {
+        .then((res) => {
+            alertService.success(res.data.msg);
             dispatch(getMovies())
         })
         .catch(function (error) {
