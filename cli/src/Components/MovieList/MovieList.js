@@ -25,6 +25,7 @@ import Header from "../Header/Header";
 import Navbar from "../Header/Navbar";
 import {accountService} from "../../Services/account.service";
 import {NavLink} from "react-router-dom";
+import Pagination from "../Pagination/Pagination";
 
 class MovieList extends Component {
 
@@ -34,7 +35,9 @@ class MovieList extends Component {
         this.state = {
             showModalDesc: false,
             selectedMovie: 0,
-            user: null
+            user: null,
+            currentPage: 1,
+            moviesPerPage: 6
         };
 
         this.handleShowModalDesc = this.handleShowModalDesc.bind(this);
@@ -42,12 +45,13 @@ class MovieList extends Component {
         this.toggleModalDesc = this.toggleModalDesc.bind(this);
         this.setSelectedMovie = this.setSelectedMovie.bind(this);
         this.searchByActorName = this.searchByActorName.bind(this);
-
+        this.paginate = this.paginate.bind(this);
         this.searchByMovieName = this.searchByMovieName.bind(this);
         this.addMovieToWishlist = this.addMovieToWishlist.bind(this);
 
 
     }
+
 
 
 
@@ -57,7 +61,10 @@ class MovieList extends Component {
         })
     };
 
-
+    paginate(pageNumber) {
+        this.setState({ currentPage: pageNumber});
+        console.log(this.state.currentPage);
+    }
 
 
     addMovieToWishlist(movie) {
@@ -121,7 +128,10 @@ class MovieList extends Component {
     }
 
 
+
+
     render() {
+
 
         const {movies, searchValueByActorName, searchValueByMovieName, error, loading} = this.props;
 
@@ -134,6 +144,11 @@ class MovieList extends Component {
                 movie['stars'].toLowerCase().startsWith(searchValueByActorName) &&
                 movie['title'].toLowerCase().startsWith(searchValueByMovieName)
         );
+
+
+        const indexOfLastMovie = this.state.currentPage * this.state.moviesPerPage;
+        const indexOfFirstMovie = indexOfLastMovie - this.state.moviesPerPage;
+        const currentMovies = this.movies.slice(indexOfFirstMovie, indexOfLastMovie);
 
 
         if (searchValueByActorName !== '') {
@@ -177,7 +192,7 @@ class MovieList extends Component {
 
                                 <div className='row'>
                                     {
-                                        this.movies.map
+                                        currentMovies.map
                                         ((movie, index) => {
                                             return (
                                                 <div className='col-sm-4' key={index}>
@@ -208,7 +223,9 @@ class MovieList extends Component {
                                                                                 d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
                                                                         </svg>
                                                                     </a>
+
                                                                 </div>
+
                                                             </React.Fragment>}
 
 
@@ -220,6 +237,12 @@ class MovieList extends Component {
                                 </div>
 
                             }
+                            <Pagination
+                                moviesPerPage={this.state.moviesPerPage}
+                                totalMovies={this.movies.length}
+                                paginate={this.paginate}
+                            />
+
 
                             {this.state.showModalDesc ?
                                 <ModalDesc
