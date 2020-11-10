@@ -19,8 +19,24 @@ const addBook = async (req, res) => {
 
     let movieSearch = await Movie.findOne({
         title: req.body.title,
+        year: req.body.year,
+        stars: req.body.stars,
+        format: req.body.format
     });
 
+    let starsArr = req.body.stars.split(/, /);
+    let starsIdentity = true;
+
+    for (let i = 0; i < starsArr.length - 1; i++) {
+        for (j = i + 1; j < starsArr.length; j++)
+            if (starsArr[i] === starsArr[j]) {
+                starsIdentity = false;
+            }
+    }
+
+    if(!starsIdentity) {
+        return res.status(404).json({msg: "Movie actors are not identity"});
+    }
     if (movieSearch) {
         return res.status(404).json({msg: "Movie already exist"});
     }
